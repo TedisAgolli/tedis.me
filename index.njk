@@ -5,8 +5,8 @@ eleventyNavigation:
   order: 1
 ---
 
-<div class="flex justify-center space-x-56 bg-red-100">
-  <div>
+<div class="flex justify-center flex-col lg:flex-row lg:space-x-56">
+  <div class="mt-5">
     <h1>Projects</h1>
     <ul class="divide-y divide-gray-200">
       <li class="py-4 flex">
@@ -105,7 +105,7 @@ eleventyNavigation:
       </li>
     </ul>
   </div>
-  <div>
+  <div class="mt-5">
     <h1>Latest 3 Posts</h1>
     {% set postslist = collections.posts | head(-3) %} {% set postslistCounter =
     collections.posts | length %} {% include "postslist.njk" %}
