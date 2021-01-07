@@ -14,7 +14,7 @@
         "watch": "eleventy --watch",
         "serve": "eleventy --serve",
         "debug": "DEBUG=* eleventy",
-        "build": "npm-run-all clean --parallel testProd:*"
+        "build": "NODE_ENV=production npm-run-all clean --parallel testProd:*"
     },
     "repository": {
         "type": "git",
@@ -44,7 +44,6 @@
         "@tailwindcss/forms": "^0.2.1",
         "autoprefixer": "^10.2.0",
         "postcss": "^8.2.2",
-        "postcss-clean": "^1.1.0",
         "postcss-cli": "^8.3.1",
         "postcss-import": "^14.0.0",
         "postcss-preset-env": "^6.7.0",
