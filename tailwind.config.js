@@ -1,3 +1,5 @@
+const colors = require("tailwindcss/colors");
+
 module.exports = {
   purge: {
     content: ["./**/*.js", "./**/*.11ty.js", "./**/*.html", "./**/*.njk"],
@@ -10,6 +12,7 @@ module.exports = {
       colors: {
         mainblue: "#00AAFF",
         cblue: "#539DC2",
+        rose: colors.rose,
       },
     },
   },

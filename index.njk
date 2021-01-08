@@ -16,7 +16,7 @@ eleventyNavigation:
           alt=""
         />
         <div class="ml-3">
-          <p class="text-sm font-medium text-gray-900">Runneth</p>
+          <p class="text-lg font-bold text-gray-900">Runneth</p>
           <p class="text-sm text-gray-500">
             Runneth is a bookmark manager that forces you to prioritize.
           </p>
@@ -26,6 +26,7 @@ eleventyNavigation:
           target="_blank"
           rel="noopener"
           title="Install Chrome extension"
+          class="flex items-center"
         >
           <img src="img/chrome.svg" alt="" class="w-8 h-8 ml-1 max-w-none" />
         </a>
@@ -34,6 +35,7 @@ eleventyNavigation:
           target="_blank"
           rel="noopener"
           title="Install Firefox extension"
+          class="flex items-center"
         >
           <img
             src="img/firefox.svg"
@@ -50,7 +52,7 @@ eleventyNavigation:
           alt=""
         />
         <div class="ml-3">
-          <p class="text-sm font-medium text-gray-900">Hex to Tailwind</p>
+          <p class="text-lg font-bold text-gray-900">Hex to Tailwind</p>
           <p class="text-sm text-gray-500">
             Convert hex to the closest Tailwind preset using the Delta E
             algorithm.
@@ -61,6 +63,7 @@ eleventyNavigation:
           target="_blank"
           rel="noopener"
           title="Go to website"
+          class="flex items-center"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -79,6 +82,7 @@ eleventyNavigation:
           target="_blank"
           rel="noopener"
           title="Install VSCode extension"
+          class="flex items-center"
         >
           <img
             src="img/vscode.svg"
@@ -94,7 +98,7 @@ eleventyNavigation:
           alt=""
         />
         <div class="ml-3">
-          <p class="text-sm font-medium text-gray-900">Mailtosucks</p>
+          <p class="text-lg font-bold text-gray-900">Mailtosucks</p>
           <p class="text-sm text-gray-500">
             Set mailto link text to the actual email and copy it on click.
           </p>
@@ -104,14 +108,19 @@ eleventyNavigation:
           target="_blank"
           rel="noopener"
           title="Install Chrome extension"
+          class="flex items-center"
         >
-          <img src="img/chrome.svg" alt="" class="w-8 h-8 ml-1 max-w-none" />
+          <img
+            src="img/chrome.svg"
+            alt=""
+            class="w-8 h-8 ml-1 max-w-none items-center"
+          />
         </a>
       </li>
     </ul>
   </div>
   <div class="mt-5">
-    <h1>Latest Posts</h1>
+    <h1>Posts</h1>
     {% set postslist = collections.posts | head(-3) %} {% set postslistCounter =
     collections.posts | length %} {% include "postslist.njk" %}
     <p>
