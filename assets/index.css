@@ -1,10 +1,20 @@
-@import '11ty.css';
+@import "11ty.css";
 
 /* purgecss start ignore */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Change Selection Text Color When Highlighting */
+::-moz-selection {
+  background-color: #8f69d1;
+  color: #fff;
+}
+::selection {
+  background-color: #8f69d1;
+  color: #fff;
+}
 
 h1 {
   @apply text-3xl;
