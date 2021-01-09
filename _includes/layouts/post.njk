@@ -3,8 +3,10 @@ layout: layouts/base.njk
 templateClass: tmpl-post
 ---
 
-<h1 class="text-center">{{ title }}</h1>
+<h1 class="text-center text-gray-700 font-medium underline">{{ title }}</h1>
 <div class="flex justify-center mt-5">
-  <div>{{ content | safe }}</div>
+  <div class="text-lg font-normal text-gray-700 max-w-3xl">
+    {{ content | safe }}
+  </div>
 </div>
 <p><a href="{{ '/' | url }}">← Home</a></p>

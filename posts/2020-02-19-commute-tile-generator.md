@@ -6,17 +6,13 @@ excerpt_separator: <!--more-->
 
 ![example](/img/commute/exampleTile.png)
 
-This form helps you generate a badge that displays the commute time
-between two points.
+This form helps you generate a badge that displays the commute time between two points.
 
 <!--more-->
 
-It uses the [Google Maps API Distance Matrix](https://developers.google.com/maps/documentation/distance-matrix/intro) to get the travel distance and
-[shields.io](https://shields.io/) to generate the badge.
+It uses the [Google Maps API Distance Matrix](https://developers.google.com/maps/documentation/distance-matrix/intro) to get the travel distance and [shields.io](https://shields.io/) to generate the badge.
 
-I built this for people who want to include a commute tile in their
-SharpTools dashboard, but the generated badge can be used for
-anything.
+I built this for people who want to include a commute tile in their SharpTools dashboard, but the generated badge can be used for anything.
 
   <meta charset="utf-8" />
   <html>
