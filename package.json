@@ -10,11 +10,12 @@
         "dev:bsync": "browser-sync start --server ./_site -w --no-open --no-notify --no-ghost-mode",
         "testProd:postcss": "postcss assets/index.css -d _site/css/ --config ./postcss.config.js",
         "testProd:eleventy": "ELEVENTY_ENV=production npx @11ty/eleventy --output=./_site ",
+        "favicon": "cp favicon.ico _site/",
         "testbuild": "NODE_ENV=production npm-run-all clean --parallel testProd:*",
         "watch": "eleventy --watch",
         "serve": "eleventy --serve",
         "debug": "DEBUG=* eleventy",
-        "build": "NODE_ENV=production npm-run-all clean --parallel testProd:*"
+        "build": "NODE_ENV=production npm-run-all clean --parallel testProd:* && npm run favicon"
     },
     "repository": {
         "type": "git",
