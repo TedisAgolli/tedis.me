@@ -20,7 +20,7 @@ I built this for people who want to include a commute tile in their SharpTools d
       function displayUrl() {
   let origLatLong = document.getElementById("origLatLong").value.trim();
   let destLatLong = document.getElementById("destLatLong").value.trim();
-  let apiKey = document.getElementById("apiKey").value.trim();
+  let apiKey = document.getElementById("apiKey").value.trim() || "API_KEY_HERE";
   let googleParams = new URLSearchParams({
     origins: origLatLong,
     destinations: destLatLong,
@@ -32,7 +32,7 @@ I built this for people who want to include a commute tile in their SharpTools d
   let googleMapsBaseUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?";
   let googleMapsUrl = googleMapsBaseUrl + googleParams;
   let shieldsVisualParams = {};
-  let label = document.getElementById("label").value;
+  let label = document.getElementById("label").value ;
   ["logo", "color", "style"].forEach((e) => {
     let formVal = document.getElementById(e).value.trim();
     if (formVal != "") {
@@ -76,7 +76,7 @@ I built this for people who want to include a commute tile in their SharpTools d
             </div>
         </div>
         <div class='mt-2'>
-            <label for="apiKey" class="block text-sm font-medium text-gray-700">Google Maps API key</label>
+            <label for="apiKey" class="block text-sm font-medium text-gray-700">Google Maps API key (optional, can insert it manually into the URL)</label>
             <div class="mt-1">
               <input type="text" name="apiKey" id="apiKey" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border border-gray-400 rounded-md" >
             </div>
