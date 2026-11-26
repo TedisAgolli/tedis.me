@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "react-tweet/theme.css";
 
 :root {
   --hw-chassis: #e8e6e1;
@@ -164,20 +165,29 @@ body {
 }
 
 /* Tactile Input */
-.hw-input {
-  width: 100%;
-  background: var(--hw-well);
-  color: var(--hw-text);
-  border: 1px solid var(--hw-border);
-  border-radius: 7px;
-  padding: 8px 11px;
-  font-family: 'IBM Plex Mono', ui-monospace, monospace;
-  font-size: 12px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
-  transition: border-color 0.15s ease;
+@layer components {
+  .hw-input {
+    width: 100%;
+    background: var(--hw-well);
+    color: var(--hw-text);
+    border: 1px solid var(--hw-border);
+    border-radius: 7px;
+    padding: 8px 11px;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 12px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: border-color 0.15s ease;
+  }
+
+  .hw-input:focus,
+  .hw-input:focus-within {
+    outline: none;
+    border-color: var(--hw-accent);
+  }
 }
 
-.hw-input:focus {
-  outline: none;
-  border-color: var(--hw-accent);
+/* Center react-tweet cleanly inside our hardware cards */
+.react-tweet-theme {
+  margin: 0 !important;
+  max-width: 100% !important;
 }

@@ -1,4 +1,5 @@
 import { queryOptions, useQuery } from '@tanstack/react-query'
+import type { Tweet } from 'react-tweet/api'
 import { PROJECTS, type Project } from '../data/projects'
 
 export interface GitHubRepoSummary {
@@ -14,6 +15,22 @@ export interface IasipQuote {
   who: string
   ep: string
   source: 'live' | 'local'
+}
+
+export function useTweet(tweetId: string | null, enabled: boolean) {
+  return useQuery({
+    queryKey: ['tweet', tweetId],
+    enabled: Boolean(tweetId) && enabled,
+    queryFn: async (): Promise<Tweet | null> => {
+      const res = await fetch(`/api/tweet?id=${encodeURIComponent(tweetId!)}`)
+      if (res.status === 404) return null
+      if (!res.ok) throw new Error(`Failed to fetch tweet (${res.status})`)
+      const json = (await res.json()) as { data?: Tweet | null }
+      return json.data ?? null
+    },
+    staleTime: 1000 * 60 * 30,
+    retry: 1,
+  })
 }
 
 const FALLBACK_QUOTES: Omit<IasipQuote, 'source'>[] = [

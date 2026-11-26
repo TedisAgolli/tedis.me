@@ -87,6 +87,15 @@ function RootLayout() {
         </Link>
 
         <div className="flex items-center gap-2">
+          <Link
+            to="/favorites"
+            onClick={() => playClick('press')}
+            data-active={pathname.startsWith('/favorites') ? 'true' : undefined}
+            className="hw-key no-underline"
+          >
+            FAVORITES
+          </Link>
+
           {SHOW_NAV_TABS ? (
             <nav aria-label="Primary" className="mr-1 flex flex-wrap items-center gap-2">
               {NAV_ITEMS.map((item) => {

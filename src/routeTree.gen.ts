@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CommuteTileGeneratorRouteImport } from './routes/commute-tile-generator'
+import { Route as FavoritesRouteImport } from './routes/favorites'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as WritingIndexRouteImport } from './routes/writing.index'
 import { Route as WritingSlugRouteImport } from './routes/writing.$slug'
@@ -23,6 +24,11 @@ const IndexRoute = IndexRouteImport.update({
 const CommuteTileGeneratorRoute = CommuteTileGeneratorRouteImport.update({
   id: '/commute-tile-generator',
   path: '/commute-tile-generator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FavoritesRoute = FavoritesRouteImport.update({
+  id: '/favorites',
+  path: '/favorites',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectsRoute = ProjectsRouteImport.update({
@@ -44,6 +50,7 @@ const WritingSlugRoute = WritingSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/commute-tile-generator': typeof CommuteTileGeneratorRoute
+  '/favorites': typeof FavoritesRoute
   '/projects': typeof ProjectsRoute
   '/writing/$slug': typeof WritingSlugRoute
   '/writing/': typeof WritingIndexRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/commute-tile-generator': typeof CommuteTileGeneratorRoute
+  '/favorites': typeof FavoritesRoute
   '/projects': typeof ProjectsRoute
   '/writing/$slug': typeof WritingSlugRoute
   '/writing': typeof WritingIndexRoute
@@ -59,6 +67,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/commute-tile-generator': typeof CommuteTileGeneratorRoute
+  '/favorites': typeof FavoritesRoute
   '/projects': typeof ProjectsRoute
   '/writing/$slug': typeof WritingSlugRoute
   '/writing/': typeof WritingIndexRoute
@@ -68,6 +77,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/commute-tile-generator'
+    | '/favorites'
     | '/projects'
     | '/writing/$slug'
     | '/writing/'
@@ -75,6 +85,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/commute-tile-generator'
+    | '/favorites'
     | '/projects'
     | '/writing/$slug'
     | '/writing'
@@ -82,6 +93,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/commute-tile-generator'
+    | '/favorites'
     | '/projects'
     | '/writing/$slug'
     | '/writing/'
@@ -90,6 +102,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CommuteTileGeneratorRoute: typeof CommuteTileGeneratorRoute
+  FavoritesRoute: typeof FavoritesRoute
   ProjectsRoute: typeof ProjectsRoute
   WritingSlugRoute: typeof WritingSlugRoute
   WritingIndexRoute: typeof WritingIndexRoute
@@ -109,6 +122,13 @@ declare module '@tanstack/react-router' {
       path: '/commute-tile-generator'
       fullPath: '/commute-tile-generator'
       preLoaderRoute: typeof CommuteTileGeneratorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/favorites': {
+      id: '/favorites'
+      path: '/favorites'
+      fullPath: '/favorites'
+      preLoaderRoute: typeof FavoritesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/projects': {
@@ -138,6 +158,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CommuteTileGeneratorRoute: CommuteTileGeneratorRoute,
+  FavoritesRoute: FavoritesRoute,
   ProjectsRoute: ProjectsRoute,
   WritingSlugRoute: WritingSlugRoute,
   WritingIndexRoute: WritingIndexRoute,
