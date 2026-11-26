@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   Link,
   Outlet,
@@ -10,6 +10,14 @@ import type { QueryClient } from '@tanstack/react-query'
 import { Moon, Sun, Volume2, VolumeX } from 'lucide-react'
 import { SITE } from '../data/site'
 import { isSfxEnabled, playClick, setSfxEnabled } from '../lib/sound'
+
+declare global {
+  interface Window {
+    goatcounter?: {
+      count: (vars?: { path?: string; title?: string; event?: boolean }) => void
+    }
+  }
+}
 
 export interface RouterContext {
   queryClient: QueryClient
@@ -40,6 +48,19 @@ function RootLayout() {
     return window.matchMedia('(prefers-color-scheme: dark)').matches
   })
   const [sfx, setSfx] = useState<boolean>(() => isSfxEnabled())
+  const lastTrackedPathRef = useRef<string | null>(null)
+
+  useEffect(() => {
+    if (lastTrackedPathRef.current === null) {
+      // Initial page load is counted by GoatCounter's script onload
+      lastTrackedPathRef.current = pathname
+      return
+    }
+    if (lastTrackedPathRef.current !== pathname) {
+      lastTrackedPathRef.current = pathname
+      window.goatcounter?.count({ path: pathname })
+    }
+  }, [pathname])
 
   useEffect(() => {
     document.documentElement.dataset.theme = dark ? 'dark' : 'light'
