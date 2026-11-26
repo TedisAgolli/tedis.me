@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+:root {
+  --hw-chassis: #e8e6e1;
+  --hw-panel: #f4f3ef;
+  --hw-well: #dcd9d2;
+  --hw-border: #c9c5bc;
+  --hw-text: #1c1b18;
+  --hw-muted: #66635c;
+  --hw-accent: #ff4f00;
+  --hw-accent-shadow: #b83700;
+  --hw-key: #faf9f6;
+  --hw-key-shadow: #b9b5ab;
+  --hw-highlight: rgba(255, 255, 255, 0.55);
+}
+
+:root[data-theme='dark'] {
+  --hw-chassis: #18191c;
+  --hw-panel: #222429;
+  --hw-well: #121316;
+  --hw-border: #32353d;
+  --hw-text: #f0f1f4;
+  --hw-muted: #8e93a0;
+  --hw-accent: #ff5c16;
+  --hw-accent-shadow: #9a3000;
+  --hw-key: #2a2d34;
+  --hw-key-shadow: #0c0d10;
+  --hw-highlight: rgba(255, 255, 255, 0.06);
+}
+
+html,
+body {
+  background-color: var(--hw-chassis);
+  color: var(--hw-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100%;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.font-mono-hw {
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Tactile Chassis Module */
+.hw-module {
+  background: var(--hw-panel);
+  border: 1px solid var(--hw-border);
+  border-radius: 12px;
+  box-shadow: inset 0 1px 0 var(--hw-highlight), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.hw-well {
+  background: var(--hw-well);
+  border: 1px solid var(--hw-border);
+  border-radius: 8px;
+}
+
+/* Physical Keycap Button */
+.hw-key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid var(--hw-border);
+  background: var(--hw-key);
+  color: var(--hw-text);
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 6px 11px;
+  border-radius: 7px;
+  box-shadow: 0 3px 0 var(--hw-key-shadow);
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.06s ease, box-shadow 0.06s ease, background-color 0.12s ease;
+}
+
+.hw-key:hover {
+  filter: brightness(1.03);
+}
+
+.hw-key:active,
+.hw-key[data-active='true'] {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--hw-key-shadow);
+}
+
+.hw-key[data-active='true'],
+.hw-key[data-variant='accent'] {
+  background: var(--hw-accent);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 3px 0 var(--hw-accent-shadow);
+}
+
+.hw-key[data-active='true']:active,
+.hw-key[data-variant='accent']:active,
+.hw-key[data-active='true'] {
+  box-shadow: 0 1px 0 var(--hw-accent-shadow);
+}
+
+.hw-key:focus-visible {
+  outline: 2px solid var(--hw-accent);
+  outline-offset: 2px;
+}
+
+/* Recessed LCD Readout */
+.hw-lcd {
+  background: #141715;
+  color: #b7f59b;
+  border-radius: 8px;
+  padding: 10px 13px;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  box-shadow: inset 0 2px 7px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.45);
+}
+
+.hw-lcd[data-tone='amber'] {
+  color: #fbbf24;
+}
+
+/* LED Indicator */
+.hw-led {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--hw-accent);
+  box-shadow: 0 0 8px var(--hw-accent);
+}
+
+.hw-led-pip {
+  height: 11px;
+  border-radius: 3px;
+  background: var(--hw-well);
+  border: 1px solid var(--hw-border);
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hw-led-pip[data-on='true'] {
+  background: var(--hw-accent);
+  border-color: transparent;
+  box-shadow: 0 0 9px rgba(255, 79, 0, 0.48);
+}
+
+/* Tactile Color Swatch Keycap */
+.hw-cap {
+  width: 32px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.28);
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.28);
+  transition: transform 0.06s ease, box-shadow 0.06s ease;
+}
+
+.hw-cap:active,
+.hw-cap[data-active='true'] {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.28);
+}
+
+/* Tactile Input */
+.hw-input {
+  width: 100%;
+  background: var(--hw-well);
+  color: var(--hw-text);
+  border: 1px solid var(--hw-border);
+  border-radius: 7px;
+  padding: 8px 11px;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 12px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: border-color 0.15s ease;
+}
+
+.hw-input:focus {
+  outline: none;
+  border-color: var(--hw-accent);
+}

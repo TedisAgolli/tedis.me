@@ -1,2 +1,6 @@
-_site/
-node_modules/
+node_modules
+dist
+.vercel
+*.tsbuildinfo
+.DS_Store
+*.local
