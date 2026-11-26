@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect x="4" y="4" width="56" height="56" rx="13" fill="#1C1B18" />
+  <rect x="46" y="10" width="8" height="8" rx="2" fill="#FF4F00" />
+  <path d="M11 22h18v5h-6.5v19h-5V27H11v-5z" fill="#F4F3EF" />
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M38.2 22h5.6l8 24h-5.3l-1.5-5h-8l-1.5 5h-5.3l8-24zm0 14.5h5.6L41 27.2l-2.8 9.3z"
+    fill="#F4F3EF"
+  />
+</svg>
