@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Link, createFileRoute, notFound } from '@tanstack/react-router'
 import { ArrowLeft, ArrowUpRight, Check, Copy } from 'lucide-react'
+import ReactMarkdown from 'react-markdown'
+import { ArrivalArticle } from '../components/ArrivalArticle'
 import { KeycapButton, LcdScreen, ModulePanel } from '../components/Hardware'
 import { getPostBySlug } from '../data/posts'
 import { playClick } from '../lib/sound'
@@ -17,6 +19,10 @@ export const Route = createFileRoute('/writing/$slug')({
 function PostDetailPage() {
   const post = Route.useLoaderData()
   const [copiedIdx, setCopiedIdx] = useState<number | null>(null)
+
+  if (post.theme === 'arrival') {
+    return <ArrivalArticle post={post} />
+  }
 
   function copyCode(text: string, idx: number) {
     void navigator.clipboard?.writeText(text)
@@ -54,7 +60,48 @@ function PostDetailPage() {
         ) : null}
 
         <div className="mt-6 space-y-4 text-sm leading-relaxed text-[var(--hw-text)]">
-          {post.blocks.map((block, idx) => {
+          {post.markdown ? (
+            <ReactMarkdown
+              components={{
+                h2: ({ children }) => (
+                  <h2 className="pt-2 font-mono-hw text-xs font-bold uppercase tracking-[0.09em] text-[var(--hw-muted)]">
+                    {children}
+                  </h2>
+                ),
+                p: ({ children }) => (
+                  <p className="text-[15px] leading-7">{children}</p>
+                ),
+                blockquote: ({ children }) => (
+                  <blockquote className="border-l-2 border-[var(--hw-accent)] pl-4 italic text-[var(--hw-muted)]">
+                    {children}
+                  </blockquote>
+                ),
+                a: ({ href, children }) => (
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline decoration-[var(--hw-accent)] underline-offset-4"
+                  >
+                    {children}
+                  </a>
+                ),
+                ul: ({ children }) => (
+                  <ul className="list-disc space-y-1.5 pl-5 text-[15px]">
+                    {children}
+                  </ul>
+                ),
+                ol: ({ children }) => (
+                  <ol className="list-decimal space-y-1.5 pl-5 text-[15px]">
+                    {children}
+                  </ol>
+                ),
+              }}
+            >
+              {post.markdown}
+            </ReactMarkdown>
+          ) : (
+            (post.blocks ?? []).map((block, idx) => {
             if (block.type === 'heading') {
               return (
                 <h2
@@ -130,7 +177,8 @@ function PostDetailPage() {
                 {block.text}
               </p>
             )
-          })}
+          })
+          )}
         </div>
       </ModulePanel>
     </div>

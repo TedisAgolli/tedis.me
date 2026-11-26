@@ -9,6 +9,7 @@ import {
 import type { QueryClient } from '@tanstack/react-query'
 import { Moon, Sun, Volume2, VolumeX } from 'lucide-react'
 import { SITE } from '../data/site'
+import { getPostBySlug } from '../data/posts'
 import { isSfxEnabled, playClick, setSfxEnabled } from '../lib/sound'
 
 declare global {
@@ -95,6 +96,16 @@ function RootLayout() {
     if (next) playClick('toggle')
   }
 
+  const isImmersivePost = (() => {
+    if (!pathname.startsWith('/writing/')) return false
+    const slug = pathname.slice('/writing/'.length).replace(/\/$/, '')
+    return Boolean(getPostBySlug(slug)?.theme)
+  })()
+
+  if (isImmersivePost) {
+    return <Outlet />
+  }
+
   return (
     <div className="mx-auto flex min-h-screen max-w-2xl flex-col px-4 py-6 sm:px-6 sm:py-8">
       <header className="mb-5 flex items-center justify-between gap-4 border-b border-[var(--hw-border)] pb-4">
@@ -108,6 +119,14 @@ function RootLayout() {
         </Link>
 
         <div className="flex items-center gap-2">
+          <Link
+            to="/writing"
+            onClick={() => playClick('press')}
+            data-active={pathname.startsWith('/writing') ? 'true' : undefined}
+            className="hw-key no-underline"
+          >
+            WRITING
+          </Link>
           <Link
             to="/favorites"
             onClick={() => playClick('press')}

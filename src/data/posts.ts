@@ -14,10 +14,68 @@ export interface Post {
   readTime: string
   excerpt: string
   coverImage?: string
-  blocks: PostBlock[]
+  unlisted?: boolean
+  theme?: 'arrival'
+  ps?: string
+  markdown?: string
+  blocks?: PostBlock[]
 }
 
-export const POSTS: Post[] = [
+function parseFrontmatter(raw: string): {
+  data: Record<string, string>
+  content: string
+} {
+  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/)
+  if (!match) return { data: {}, content: raw.trim() }
+
+  const data: Record<string, string> = {}
+  for (const line of match[1].split(/\r?\n/)) {
+    const idx = line.indexOf(':')
+    if (idx === -1) continue
+    const key = line.slice(0, idx).trim()
+    const val = line
+      .slice(idx + 1)
+      .trim()
+      .replace(/^["']|["']$/g, '')
+    if (key) data[key] = val
+  }
+
+  return { data, content: match[2].trim() }
+}
+
+const markdownFiles = import.meta.glob<string>('/content/writing/*.md', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+})
+
+const MARKDOWN_POSTS: Post[] = Object.entries(markdownFiles).map(
+  ([filePath, raw], idx) => {
+    const slug = filePath.split('/').pop()!.replace(/\.md$/, '')
+    const { data, content } = parseFrontmatter(raw)
+    const firstParagraph =
+      content
+        .split(/\r?\n\r?\n/)
+        .map((p) => p.trim())
+        .find((p) => p && !p.startsWith('#')) ?? ''
+
+    return {
+      slug,
+      code: data.code || `LOG-${String(idx + 3).padStart(2, '0')}`,
+      title: data.title || slug,
+      date: data.date || 'Draft',
+      readTime: data.readTime || '2 min',
+      excerpt: data.excerpt || firstParagraph,
+      coverImage: data.coverImage || undefined,
+      unlisted: data.unlisted === 'true',
+      theme: data.theme === 'arrival' ? 'arrival' : undefined,
+      ps: data.ps || undefined,
+      markdown: content,
+    }
+  },
+)
+
+const LEGACY_POSTS: Post[] = [
   {
     slug: 'iasip-quote',
     code: 'LOG-02',
@@ -108,6 +166,8 @@ Get-IASIP-Quote`,
     ],
   },
 ]
+
+export const POSTS: Post[] = [...MARKDOWN_POSTS, ...LEGACY_POSTS]
 
 export function getPostBySlug(slug: string): Post | undefined {
   return POSTS.find((p) => p.slug === slug)

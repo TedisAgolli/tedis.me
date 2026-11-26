@@ -9,9 +9,11 @@ export const Route = createFileRoute('/writing/')({
 })
 
 function WritingIndexPage() {
+  const visiblePosts = POSTS.filter((p) => !p.unlisted)
+
   return (
     <div className="space-y-4">
-      <ModulePanel unit="ARCHIVE · WRITING LOGS" rightLabel={`${POSTS.length} ENTRIES`}>
+      <ModulePanel unit="ARCHIVE · WRITING LOGS" rightLabel={`${visiblePosts.length} ENTRIES`}>
         <h1 className="text-xl font-bold tracking-tight">Writing</h1>
         <p className="mt-1 text-sm text-[var(--hw-muted)]">
           Release notes, terminal snippets, and short posts on things I build.
@@ -19,7 +21,7 @@ function WritingIndexPage() {
       </ModulePanel>
 
       <div className="space-y-3">
-        {POSTS.map((post) => (
+        {visiblePosts.map((post) => (
           <Link
             key={post.slug}
             to="/writing/$slug"
