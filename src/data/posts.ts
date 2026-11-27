@@ -85,6 +85,7 @@ const LEGACY_POSTS: Post[] = [
     excerpt:
       "Show a random quote from It's Always Sunny in Philadelphia right in your terminal.",
     coverImage: '/img/iasip_quote.png',
+    unlisted: true,
     blocks: [
       {
         type: 'paragraph',
@@ -136,6 +137,7 @@ Get-IASIP-Quote`,
     excerpt:
       'A bookmark manager with a strict 5-item cap so you stop hoarding links you will never read.',
     coverImage: '/img/runneth_banner.png',
+    unlisted: true,
     blocks: [
       {
         type: 'paragraph',
